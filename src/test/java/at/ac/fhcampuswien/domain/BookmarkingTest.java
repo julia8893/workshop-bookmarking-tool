@@ -11,6 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BookmarkingTest {
 
+    Bookmarking bookmarking;
+
+    @BeforeEach
+    public void setup() {
+        bookmarking = new Bookmarking();
+    }
+
     @Test
     public void ensureAllSecureUrlsAreFound(){
         int expectedResult = 3;
@@ -19,5 +26,14 @@ public class BookmarkingTest {
         int result = new Bookmarking().countSecureUrls(testBookmarks);
 
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void validateSingleUrl() {
+        String urlToValidate = "https://orf.at";
+
+        boolean result = bookmarking.validateUrl(urlToValidate);
+
+        assertTrue(result);
     }
 }

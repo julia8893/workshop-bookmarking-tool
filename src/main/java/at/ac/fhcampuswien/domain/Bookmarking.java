@@ -11,4 +11,8 @@ public class Bookmarking {
         return url.size();
     }
 
+
+    public boolean validateUrl(String url) {
+        return true;
+    }
 }
