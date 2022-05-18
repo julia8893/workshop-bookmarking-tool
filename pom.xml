@@ -20,7 +20,7 @@
 
         <!-- Latest stable release does not work with Maven Surefire 2.21.0 check: https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-maven-->
         <junit.platform.version>1.7.1</junit.platform.version>
-        <junit.jupiter.api>5.7.1</junit.jupiter.api>
+        <junit.jupiter.api>5.8.2</junit.jupiter.api>
 
         <!-- Coverage configuration -->
         <jacoco.maven.version>0.8.6</jacoco.maven.version>
@@ -49,16 +49,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Javadoc plugin does not require to be explicitly stated-->
-        <!-- Maven goal: mvn clean javadoc:javadoc javadoc:test-javadoc -->
-        <!--
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>-->
-
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -80,24 +76,6 @@
                     </compilerArgs>
 
                     <encoding>${project.build.sourceEncoding}</encoding>
-
-                </configuration>
-            </plugin>
-
-            <!-- Required for running unit tests -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin}</version>
-                <configuration>
-                    <includes>
-                        <include>**/Test*.java</include>
-                        <include>**/*Test.java</include>
-                        <include>**/*Tests.java</include>
-                        <include>**/*TestCase.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**Main**</exclude>
-                    </excludes>
 
                 </configuration>
             </plugin>

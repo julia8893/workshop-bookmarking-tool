@@ -19,13 +19,13 @@ public class BookmarkingTest {
     }
 
     @Test
-    public void ensureAllSecureUrlsAreFound(){
-        int expectedResult = 3;
-        List<Bookmark> testBookmarks = Arrays.asList(new Bookmark("http://orf.at"), new Bookmark("https://facebook.com"), new Bookmark("https://oracle.com"));
+    public void shouldAddOneBookmarkWithTag() {
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").tag("Orf").build();
 
-        int result = new Bookmarking().countSecureUrls(testBookmarks);
+        bookmarking.addBookmark(bookmark);
 
-        assertEquals(expectedResult, result);
+        int expectedBookmarksSize = bookmarking.bookmarks.size();
+        assertEquals(expectedBookmarksSize, 1);
     }
 
     @Test
@@ -35,5 +35,18 @@ public class BookmarkingTest {
         boolean result = bookmarking.validateUrl(urlToValidate);
 
         assertTrue(result);
+    }
+
+    @Test
+    public void ensureAllSecureUrlsAreFound() {
+        int expectedResult = 3;
+        List<Bookmark> testBookmarks = Arrays.asList(
+                new Bookmark("http://orf.at", "Orf"),
+                new Bookmark("https://facebook.com", "Facebook"),
+                new Bookmark("https://oracle.com", "Oracle"));
+
+        int result = new Bookmarking().countSecureUrls(testBookmarks);
+
+        assertEquals(expectedResult, result);
     }
 }
