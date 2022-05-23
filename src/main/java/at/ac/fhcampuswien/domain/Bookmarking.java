@@ -15,8 +15,12 @@ public class Bookmarking {
         this.bookmarkList = new ArrayList<>();
     }
 
-    public void add(Bookmark bookmark){
-        bookmarkList.add(bookmark);
+    public void add(Bookmark bookmark) throws InvalidUrlException {
+        if(validateUrl(bookmark.getUrl())) {
+            bookmarkList.add(bookmark);
+            return;
+        }
+        throw new InvalidUrlException();
     }
 
     public boolean validateUrl(String url) {

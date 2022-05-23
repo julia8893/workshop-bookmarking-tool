@@ -9,8 +9,8 @@ public class BookmarkingTest {
 
     //* As a user I want to bookmark a URL
     @Test
-    public void ensureUrlIsBookmarked() {
-        Bookmark bookmark = Bookmark.builder().url("orf.at").build();
+    public void ensureUrlIsBookmarked() throws InvalidUrlException {
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").build();
 
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
@@ -19,8 +19,8 @@ public class BookmarkingTest {
     }
 
     @Test
-    public void ensureTwoUrlsAreBookmarked() {
-        Bookmark bookmark = Bookmark.builder().url("orf.at").build();
+    public void ensureTwoUrlsAreBookmarked() throws InvalidUrlException {
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").build();
 
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
@@ -50,10 +50,20 @@ public class BookmarkingTest {
         assertFalse(result);
     }
 
+    @Test
+    public void ensureThatEmptyUrlIsInvalid() {
+        String url = "";
+
+        Bookmarking bookmarking = new Bookmarking();
+        boolean result = bookmarking.validateUrl(url);
+
+        assertFalse(result);
+    }
+
     //* As a user I want to be able to Tag a URL with a keyword
     @Test
-    public void ensureAUrlIsTagged() {
-        Bookmark bookmark = Bookmark.builder().url("orf.at").tag("#").build();
+    public void ensureAUrlIsTagged() throws InvalidUrlException {
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").tag("#").build();
 
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);

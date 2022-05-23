@@ -2,3 +2,8 @@
   * URLs must be valid
 
 * As a user I want to be able to Tag a URL with a keyword
+
+* As a user when I add a duplicate bookmark, I
+    want the system to increase the rating of that
+    bookmark, because no exact duplicates should
+    exist
