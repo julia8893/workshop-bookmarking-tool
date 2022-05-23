@@ -17,4 +17,15 @@ public class BookmarkingTest {
 
         assertEquals(1, bookmarking.bookmarkList.size());
     }
+
+    @Test
+    public void ensureTwoUrlsAreBookmarked() {
+        Bookmark bookmark = Bookmark.builder().url("orf.at").build();
+
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark);
+
+        assertEquals(2, bookmarking.bookmarkList.size());
+    }
 }
