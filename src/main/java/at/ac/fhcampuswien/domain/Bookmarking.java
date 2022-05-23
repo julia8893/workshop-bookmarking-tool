@@ -1,17 +1,20 @@
 package at.ac.fhcampuswien.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import at.ac.fhcampuswien.data.Bookmark;
 
 public class Bookmarking {
 
+    List<Bookmark> bookmarkList;
+
     public Bookmarking() {
+        this.bookmarkList = new ArrayList<>();
     }
 
-    public int countSecureUrls(List<Bookmark> url) {
-        return 0;
-        //throw new UnsupportedOperationException()
+    public void add(Bookmark bookmark){
+        bookmarkList.add(bookmark);
     }
 
 }

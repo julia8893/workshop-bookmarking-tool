@@ -49,6 +49,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Javadoc plugin does not require to be explicitly stated-->
         <!-- Maven goal: mvn clean javadoc:javadoc javadoc:test-javadoc -->
         <!--
@@ -85,22 +92,6 @@
             </plugin>
 
             <!-- Required for running unit tests -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin}</version>
-                <configuration>
-                    <includes>
-                        <include>**/Test*.java</include>
-                        <include>**/*Test.java</include>
-                        <include>**/*Tests.java</include>
-                        <include>**/*TestCase.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**Main**</exclude>
-                    </excludes>
-
-                </configuration>
-            </plugin>
 
             <!-- Required for generating coverage report -->
             <plugin>
