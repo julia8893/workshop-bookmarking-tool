@@ -72,7 +72,10 @@ public class BookmarkingTest {
     //* As a user I want to be able to Tag a URL with a keyword
     @Test
     public void ensureAUrlIsTagged() throws InvalidUrlException {
-        Bookmark bookmark = Bookmark.builder().url("https://orf.at").tag("#").build();
+        Bookmark bookmark = Bookmark.builder()
+                .url("https://orf.at")
+                .keyword("#")
+                .build();
 
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
