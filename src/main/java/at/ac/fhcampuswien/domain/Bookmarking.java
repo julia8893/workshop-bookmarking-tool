@@ -17,11 +17,9 @@ public class Bookmarking {
 
     public void add(Bookmark bookmark) throws InvalidUrlException {
         if(validateUrl(bookmark.getUrl())) {
-            for (Bookmark value : bookmarkList) {
-                if (value.getUrl().equals(bookmark.getUrl())) {
-                    bookmark.increaseRating();
-                    return;
-                }
+            if(checkUrlDuplication(bookmark)){
+                bookmark.increaseRating();
+                return;
             }
             bookmarkList.add(bookmark);
             return;
@@ -32,9 +30,13 @@ public class Bookmarking {
     public boolean validateUrl(String url) {
         try {
             new URL(url);
-            return true;
         } catch (MalformedURLException e) {
             return false;
         }
+        return true;
+    }
+
+    private boolean checkUrlDuplication(Bookmark bookmarkToCheck){
+        return bookmarkList.stream().anyMatch(bookmark -> bookmark.getUrl().equals(bookmarkToCheck.getUrl()));
     }
 }
