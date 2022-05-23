@@ -21,10 +21,11 @@ public class BookmarkingTest {
     @Test
     public void ensureTwoUrlsAreBookmarked() throws InvalidUrlException {
         Bookmark bookmark = Bookmark.builder().url("https://orf.at").build();
+        Bookmark bookmark2 = Bookmark.builder().url("https://orf2.at").build();
 
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
-        bookmarking.add(bookmark);
+        bookmarking.add(bookmark2);
 
         assertEquals(2, bookmarking.bookmarkList.size());
     }
@@ -81,5 +82,20 @@ public class BookmarkingTest {
         bookmarking.add(bookmark);
 
         assertEquals(1, bookmarking.bookmarkList.size());
+    }
+
+    @Test
+    public void ensureRatingIsIncreasedOnDuplicateBookmark() throws InvalidUrlException {
+        Bookmark bookmark = Bookmark.builder()
+                .url("https://orf.at")
+                .keyword("#")
+                .build();
+
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark);
+
+        assertEquals(1, bookmarking.bookmarkList.size());
+        assertEquals(1, bookmark.getRating());
     }
 }

@@ -17,6 +17,12 @@ public class Bookmarking {
 
     public void add(Bookmark bookmark) throws InvalidUrlException {
         if(validateUrl(bookmark.getUrl())) {
+            for (Bookmark value : bookmarkList) {
+                if (value.getUrl().equals(bookmark.getUrl())) {
+                    bookmark.increaseRating();
+                    return;
+                }
+            }
             bookmarkList.add(bookmark);
             return;
         }
