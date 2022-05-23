@@ -5,6 +5,8 @@ import org.junit.jupiter.api.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -112,7 +114,8 @@ public class BookmarkingTest {
         bookmarking.add(bookmark);
         bookmarking.add(bookmark);
 
-        assertEquals(1, bookmarking.bookmarkList.size());
+        int result = bookmarking.bookmarkList.size();
+        assertEquals(1, result);
     }
 
     @Test
@@ -128,5 +131,52 @@ public class BookmarkingTest {
         int result = bookmarking.getSecureUrlAmount();
 
         assertEquals(2, result);
+    }
+
+    @Test
+    public void ensureBookmarksAreFilteredByOneKeyword() throws InvalidUrlException {
+
+        // Arrange
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("aut").build();
+        Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("aut").build();
+        Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("social").build();
+
+        // Act
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark1);
+        bookmarking.add(bookmark2);
+        List<String> filterKeywords = new ArrayList<>();
+        filterKeywords.add("aut");
+        int result = bookmarking.filterByKeywords(filterKeywords).size();
+
+        // Assert
+        assertEquals(2, result);
+
+    }
+
+    @Test
+    public void ensureBookmarksAreFilteredByManyKeywords() throws InvalidUrlException {
+
+        // Arrange
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("aut").build();
+        Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("aut").build();
+        Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("social").build();
+        Bookmark bookmark3 = Bookmark.builder().url("http://oracle.com").keyword("programming").build();
+
+        // Act
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark1);
+        bookmarking.add(bookmark2);
+        bookmarking.add(bookmark3);
+        List<String> filterKeywords = new ArrayList<>();
+        filterKeywords.add("aut");
+        filterKeywords.add("programming");
+        int result = bookmarking.filterByKeywords(filterKeywords).size();
+
+        // Assert
+        assertEquals(3, result);
+
     }
 }

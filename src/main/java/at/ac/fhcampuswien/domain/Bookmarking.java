@@ -17,8 +17,8 @@ public class Bookmarking {
     }
 
     public void add(Bookmark bookmark) throws InvalidUrlException {
-        if(validateUrl(bookmark.getUrl())) {
-            if(checkUrlDuplication(bookmark)){
+        if (validateUrl(bookmark.getUrl())) {
+            if (checkUrlDuplication(bookmark)) {
                 bookmark.increaseRating();
                 return;
             }
@@ -37,16 +37,28 @@ public class Bookmarking {
         return true;
     }
 
-    private boolean checkUrlDuplication(Bookmark bookmarkToCheck){
+    private boolean checkUrlDuplication(Bookmark bookmarkToCheck) {
         return bookmarkList.stream().anyMatch(bookmark -> bookmark.getUrl().equals(bookmarkToCheck.getUrl()));
     }
 
     public int getSecureUrlAmount() throws MalformedURLException {
         int securedAmount = 0;
-        for (Bookmark bookmark:bookmarkList) {
-            if(new URL(bookmark.getUrl()).getProtocol().equals(SECURE_URL))
+        for (Bookmark bookmark : bookmarkList) {
+            if (new URL(bookmark.getUrl()).getProtocol().equals(SECURE_URL))
                 securedAmount++;
         }
         return securedAmount;
+    }
+
+    public List<Bookmark> filterByKeywords(List<String> filterKeywords) {
+
+        List<Bookmark> filteredBookmarks = new ArrayList<>();
+        for (Bookmark bookmark : bookmarkList) {
+            for (String filterKeyword : filterKeywords) {
+                if (bookmark.getKeyword().equals(filterKeyword))
+                    filteredBookmarks.add(bookmark);
+            }
+        }
+        return filteredBookmarks;
     }
 }

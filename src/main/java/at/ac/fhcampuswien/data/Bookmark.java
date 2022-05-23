@@ -15,7 +15,7 @@ public final class Bookmark {
     String keyword;
     int rating;
 
-    public void increaseRating(){
+    public void increaseRating() {
         rating++;
     }
 }
