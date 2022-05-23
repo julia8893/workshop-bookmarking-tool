@@ -44,8 +44,7 @@ public class Bookmarking {
     public int getSecureUrlAmount() throws MalformedURLException {
         int securedAmount = 0;
         for (Bookmark bookmark:bookmarkList) {
-            URL url = new URL(bookmark.getUrl());
-            if(url.getProtocol().equals(SECURE_URL))
+            if(new URL(bookmark.getUrl()).getProtocol().equals(SECURE_URL))
                 securedAmount++;
         }
         return securedAmount;
