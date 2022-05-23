@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 import at.ac.fhcampuswien.data.Bookmark;
 
@@ -48,6 +49,28 @@ public class Bookmarking {
                 securedAmount++;
         }
         return securedAmount;
+    }
+
+    public void setBookmarkDomain() throws MalformedURLException {
+        for (Bookmark bookmark : bookmarkList) {
+            String host = new URL(bookmark.getUrl()).getHost();
+            bookmark.setDomain(host);
+        }
+    }
+
+    public boolean associateDomain() {
+        try {
+            HashMap<Bookmark, String> associtedBookmarks = new HashMap<Bookmark, String>();
+            setBookmarkDomain();
+            for (Bookmark bookmark : bookmarkList){
+                String domain = bookmark.getDomain();
+                // ToDo
+
+            }
+        } catch (MalformedURLException e) {
+            return false;
+        }
+        return false;
     }
 
     public List<Bookmark> filterByKeywords(List<String> filterKeywords) {

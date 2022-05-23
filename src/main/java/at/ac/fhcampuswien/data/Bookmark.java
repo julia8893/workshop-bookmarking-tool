@@ -13,9 +13,14 @@ public final class Bookmark {
 
     String url;
     String keyword;
+    String domain;
     int rating;
 
     public void increaseRating() {
         rating++;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 }

@@ -80,7 +80,7 @@ public class BookmarkingTest {
     public void ensureAUrlIsTagged() throws InvalidUrlException {
         Bookmark bookmark = Bookmark.builder()
                 .url("https://orf.at")
-                .keyword("#")
+                .keyword("aut")
                 .build();
 
         Bookmarking bookmarking = new Bookmarking();
@@ -93,21 +93,22 @@ public class BookmarkingTest {
     public void ensureRatingIsIncreasedOnDuplicateBookmark() throws InvalidUrlException {
         Bookmark bookmark = Bookmark.builder()
                 .url("https://orf.at")
-                .keyword("#")
+                .keyword("aut")
                 .build();
 
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
         bookmarking.add(bookmark);
 
-        assertEquals(1, bookmark.getRating());
+        int result = bookmark.getRating();
+        assertEquals(1, result);
     }
 
     @Test
     public void ensureDuplicateUrlIsNotBookmarked() throws InvalidUrlException {
         Bookmark bookmark = Bookmark.builder()
                 .url("https://orf.at")
-                .keyword("#")
+                .keyword("aut")
                 .build();
 
         Bookmarking bookmarking = new Bookmarking();
@@ -120,17 +121,42 @@ public class BookmarkingTest {
 
     @Test
     public void ensureThatNumberOfSecuredUrlsIsReturned() throws InvalidUrlException, MalformedURLException {
-        Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("#").build();
-        Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("#").build();
-        Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("#").build();
+
+        // Arrange
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("aut").build();
+        Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("aut").build();
+        Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("social").build();
+
+        // Act
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
         bookmarking.add(bookmark1);
         bookmarking.add(bookmark2);
-
         int result = bookmarking.getSecureUrlAmount();
 
+        // Assert
         assertEquals(2, result);
+    }
+
+    @Test
+    public void ensureNewBookmarkGetsAssociatedBySameDomain() throws InvalidUrlException {
+
+        // Arrange
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("aut").build();
+        Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("aut").build();
+        Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("social").build();
+        Bookmark bookmark3 = Bookmark.builder().url("http://derstandard.at").keyword("social").build();
+
+        // Act
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark1);
+        bookmarking.add(bookmark2);
+        bookmarking.add(bookmark3);
+        boolean result = bookmarking.associateDomain();
+
+        // Assert
+        assertTrue(result);
     }
 
     @Test

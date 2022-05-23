@@ -10,3 +10,9 @@
 
 * As a user I want to know how many of my
     bookmarks are secure URLs
+
+* As a user I want a new bookmark to become associated with other bookmarks that are from the same domain
+
+* As a user I want to be able to filter bookmarks by one keyword
+
+* As a user I want to be able to filter bookmarks by one or more keywords
