@@ -39,4 +39,14 @@ public class BookmarkingTest {
 
         assertTrue(result);
     }
+
+    @Test
+    public void ensureThatUrlIsInvalid() {
+        String url = "orf.whatever";
+
+        Bookmarking bookmarking = new Bookmarking();
+        boolean result = bookmarking.validateUrl(url);
+
+        assertFalse(result);
+    }
 }
