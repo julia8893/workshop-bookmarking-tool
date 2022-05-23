@@ -7,3 +7,6 @@
     want the system to increase the rating of that
     bookmark, because no exact duplicates should
     exist
+
+* As a user I want to know how many of my
+    bookmarks are secure URLs

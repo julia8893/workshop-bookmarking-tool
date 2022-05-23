@@ -3,6 +3,9 @@ package at.ac.fhcampuswien.domain;
 import at.ac.fhcampuswien.data.Bookmark;
 import org.junit.jupiter.api.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BookmarkingTest {
@@ -110,5 +113,20 @@ public class BookmarkingTest {
         bookmarking.add(bookmark);
 
         assertEquals(1, bookmarking.bookmarkList.size());
+    }
+
+    @Test
+    public void ensureThatNumberOfSecuredUrlsIsReturned() throws InvalidUrlException, MalformedURLException {
+        Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("#").build();
+        Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("#").build();
+        Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("#").build();
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark1);
+        bookmarking.add(bookmark2);
+
+        int result = bookmarking.getSecureUrlAmount();
+
+        assertEquals(2, result);
     }
 }

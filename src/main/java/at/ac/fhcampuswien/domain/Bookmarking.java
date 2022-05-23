@@ -10,6 +10,7 @@ import at.ac.fhcampuswien.data.Bookmark;
 public class Bookmarking {
 
     List<Bookmark> bookmarkList;
+    final String SECURE_URL = "https";
 
     public Bookmarking() {
         this.bookmarkList = new ArrayList<>();
@@ -38,5 +39,15 @@ public class Bookmarking {
 
     private boolean checkUrlDuplication(Bookmark bookmarkToCheck){
         return bookmarkList.stream().anyMatch(bookmark -> bookmark.getUrl().equals(bookmarkToCheck.getUrl()));
+    }
+
+    public int getSecureUrlAmount() throws MalformedURLException {
+        int securedAmount = 0;
+        for (Bookmark bookmark:bookmarkList) {
+            URL url = new URL(bookmark.getUrl());
+            if(url.getProtocol().equals(SECURE_URL))
+                securedAmount++;
+        }
+        return securedAmount;
     }
 }
