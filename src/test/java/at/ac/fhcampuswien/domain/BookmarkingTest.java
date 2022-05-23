@@ -28,4 +28,15 @@ public class BookmarkingTest {
 
         assertEquals(2, bookmarking.bookmarkList.size());
     }
+
+    //  * URLs must be valid
+    @Test
+    public void ensureThatUrlIsValid() {
+        String url = "https://orf.at";
+
+        Bookmarking bookmarking = new Bookmarking();
+        boolean result = bookmarking.validateUrl(url);
+
+        assertTrue(result);
+    }
 }

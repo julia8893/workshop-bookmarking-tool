@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien.domain;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,4 +19,12 @@ public class Bookmarking {
         bookmarkList.add(bookmark);
     }
 
+    public boolean validateUrl(String url) {
+        try {
+            new URL(url);
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        }
+    }
 }
