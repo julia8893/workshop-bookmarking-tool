@@ -95,7 +95,20 @@ public class BookmarkingTest {
         bookmarking.add(bookmark);
         bookmarking.add(bookmark);
 
-        assertEquals(1, bookmarking.bookmarkList.size());
         assertEquals(1, bookmark.getRating());
+    }
+
+    @Test
+    public void ensureDuplicateUrlIsNotBookmarked() throws InvalidUrlException {
+        Bookmark bookmark = Bookmark.builder()
+                .url("https://orf.at")
+                .keyword("#")
+                .build();
+
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark);
+
+        assertEquals(1, bookmarking.bookmarkList.size());
     }
 }
