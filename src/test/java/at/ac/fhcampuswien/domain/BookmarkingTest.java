@@ -29,6 +29,15 @@ public class BookmarkingTest {
         assertEquals(2, bookmarking.bookmarkList.size());
     }
 
+    @Test
+    public void ensureInvalidUrlIsNotBookmarked() {
+        Bookmark bookmark = Bookmark.builder().url("orf.at").build();
+
+        Bookmarking bookmarking = new Bookmarking();
+
+        assertThrows(InvalidUrlException.class, () -> bookmarking.add(bookmark));
+    }
+
     //  * URLs must be valid
     @Test
     public void ensureThatUrlIsValid() {
