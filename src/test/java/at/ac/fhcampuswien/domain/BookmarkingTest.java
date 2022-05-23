@@ -49,4 +49,15 @@ public class BookmarkingTest {
 
         assertFalse(result);
     }
+
+    //* As a user I want to be able to Tag a URL with a keyword
+    @Test
+    public void ensureAUrlIsTagged() {
+        Bookmark bookmark = Bookmark.builder().url("orf.at").tag("#").build();
+
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+
+        assertEquals(1, bookmarking.bookmarkList.size());
+    }
 }

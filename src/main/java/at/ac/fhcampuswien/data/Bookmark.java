@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public final class Bookmark {
 
     String url;
+    String tag;
 }
