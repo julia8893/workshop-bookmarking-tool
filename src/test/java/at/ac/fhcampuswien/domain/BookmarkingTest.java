@@ -143,13 +143,13 @@ public class BookmarkingTest {
     @Disabled
     public void ensureNewBookmarkGetsAssociatedBySameDomain() throws InvalidUrlException {
 
-        // Arrange
+
         Bookmark bookmark = Bookmark.builder().url("https://orf.at").keyword("aut").build();
         Bookmark bookmark1 = Bookmark.builder().url("https://youtube.com").keyword("aut").build();
         Bookmark bookmark2 = Bookmark.builder().url("http://facebook.at").keyword("social").build();
         Bookmark bookmark3 = Bookmark.builder().url("http://derstandard.at").keyword("social").build();
 
-        // Act
+
         Bookmarking bookmarking = new Bookmarking();
         bookmarking.add(bookmark);
         bookmarking.add(bookmark1);
@@ -157,7 +157,7 @@ public class BookmarkingTest {
         bookmarking.add(bookmark3);
         boolean result = bookmarking.associateDomain();
 
-        // Assert
+
         assertTrue(result);
     }
 
