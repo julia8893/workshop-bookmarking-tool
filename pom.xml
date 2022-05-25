@@ -140,12 +140,12 @@
                     </inScopeClasses>-->
                     <targetClasses>
                         <!-- Example: <param>lapr.project.model.*</param> -->
-                        <param>pt.ipp.isep.dei.examples.tdd.basic.domain.*</param>
+                        <param>at.ac.fhcampuswien.domain.*</param>
                     </targetClasses>
 
                     <targetTests>
                         <!-- Example: <param>lapr.project.utils.*</param> -->
-                        <param>pt.ipp.isep.dei.examples.tdd.basic.domain.*</param>
+                        <param>at.ac.fhcampuswien.domain.*</param>
                     </targetTests>
 
                     <outputFormats>

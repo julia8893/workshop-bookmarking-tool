@@ -1,7 +1,88 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bookmarking.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop_bookmarking_tool</a> &gt; <a href="index.source.html" class="el_package">at.ac.fhcampuswien.domain</a> &gt; <span class="el_source">Bookmarking.java</span></div><h1>Bookmarking.java</h1><pre class="source lang-java linenums">package at.ac.fhcampuswien.domain;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bookmarking.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop_bookmarking_tool</a> &gt; <a href="index.source.html" class="el_package">at.ac.fhcampuswien.domain</a> &gt; <span class="el_source">Bookmarking.java</span></div><h1>Bookmarking.java</h1><pre class="source lang-java linenums">package at.ac.fhcampuswien.domain;
 
-<span class="nc" id="L3">public class Bookmarking {</span>
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
 
+import at.ac.fhcampuswien.data.Bookmark;
 
+public class Bookmarking {
+
+    List&lt;Bookmark&gt; bookmarkList;
+<span class="nc" id="L14">    final String SECURE_URL = &quot;https&quot;;</span>
+
+<span class="nc" id="L16">    public Bookmarking() {</span>
+<span class="nc" id="L17">        this.bookmarkList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L18">    }</span>
+
+    public void add(Bookmark bookmark) throws InvalidUrlException {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if (validateUrl(bookmark.getUrl())) {</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            if (checkUrlDuplication(bookmark)) {</span>
+<span class="nc" id="L23">                bookmark.increaseRating();</span>
+<span class="nc" id="L24">                return;</span>
+            }
+<span class="nc" id="L26">            bookmarkList.add(bookmark);</span>
+<span class="nc" id="L27">            return;</span>
+        }
+<span class="nc" id="L29">        throw new InvalidUrlException();</span>
+    }
+
+    public boolean validateUrl(String url) {
+        try {
+<span class="nc" id="L34">            new URL(url);</span>
+<span class="nc" id="L35">        } catch (MalformedURLException e) {</span>
+<span class="nc" id="L36">            return false;</span>
+<span class="nc" id="L37">        }</span>
+<span class="nc" id="L38">        return true;</span>
+    }
+
+    private boolean checkUrlDuplication(Bookmark bookmarkToCheck) {
+<span class="nc" id="L42">        return bookmarkList.stream().anyMatch(bookmark -&gt; bookmark.getUrl().equals(bookmarkToCheck.getUrl()));</span>
+    }
+
+    public int getSecureUrlAmount() throws MalformedURLException {
+<span class="nc" id="L46">        int securedAmount = 0;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (Bookmark bookmark : bookmarkList) {</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (new URL(bookmark.getUrl()).getProtocol().equals(SECURE_URL))</span>
+<span class="nc" id="L49">                securedAmount++;</span>
+<span class="nc" id="L50">        }</span>
+<span class="nc" id="L51">        return securedAmount;</span>
+    }
+
+    public void setBookmarkDomain() throws MalformedURLException {
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        for (Bookmark bookmark : bookmarkList) {</span>
+<span class="nc" id="L56">            String host = new URL(bookmark.getUrl()).getHost();</span>
+<span class="nc" id="L57">            bookmark.setDomain(host);</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">    }</span>
+
+    public boolean associateDomain() {
+        try {
+<span class="nc" id="L63">            HashMap&lt;Bookmark, String&gt; associtedBookmarks = new HashMap&lt;Bookmark, String&gt;();</span>
+<span class="nc" id="L64">            setBookmarkDomain();</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            for (Bookmark bookmark : bookmarkList){</span>
+<span class="nc" id="L66">                String domain = bookmark.getDomain();</span>
+                // ToDo
+
+<span class="nc" id="L69">            }</span>
+<span class="nc" id="L70">        } catch (MalformedURLException e) {</span>
+<span class="nc" id="L71">            return false;</span>
+<span class="nc" id="L72">        }</span>
+<span class="nc" id="L73">        return false;</span>
+    }
+
+    public List&lt;Bookmark&gt; filterByKeywords(List&lt;String&gt; filterKeywords) {
+
+<span class="nc" id="L78">        List&lt;Bookmark&gt; filteredBookmarks = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        for (Bookmark bookmark : bookmarkList) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            for (String filterKeyword : filterKeywords) {</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                if (bookmark.getKeyword().equals(filterKeyword))</span>
+<span class="nc" id="L82">                    filteredBookmarks.add(bookmark);</span>
+<span class="nc" id="L83">            }</span>
+<span class="nc" id="L84">        }</span>
+<span class="nc" id="L85">        return filteredBookmarks;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

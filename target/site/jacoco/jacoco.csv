@@ -1,2 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-workshop_bookmarking_tool,at.ac.fhcampuswien.domain,Bookmarking,3,0,0,0,1,0,1,0,1,0
+workshop_bookmarking_tool,at.ac.fhcampuswien.data,Bookmark,45,0,0,0,11,0,9,0,9,0
+workshop_bookmarking_tool,at.ac.fhcampuswien.data,Bookmark.BookmarkBuilder,62,0,0,0,1,0,7,0,7,0
+workshop_bookmarking_tool,at.ac.fhcampuswien.domain,InvalidUrlException,3,0,0,0,1,0,1,0,1,0
+workshop_bookmarking_tool,at.ac.fhcampuswien.domain,Bookmarking,171,0,18,0,45,0,18,0,9,0
