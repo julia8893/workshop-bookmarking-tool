@@ -23,4 +23,8 @@ public final class Bookmark {
     public void setDomain(String domain) {
         this.domain = domain;
     }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 }

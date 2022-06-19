@@ -65,4 +65,13 @@ public class Bookmarking {
         }
         return filteredBookmarks;
     }
+
+    public void removeTagFromBookmark(Bookmark bookmark) throws InvalidUrlException {
+        Bookmark foundBookmark = findBookmarkByUrl(bookmark.getUrl());
+        foundBookmark.setKeyword("");
+    }
+
+    private Bookmark findBookmarkByUrl(String url) throws InvalidUrlException {
+        return this.bookmarkList.stream().findFirst().filter(bookmark -> bookmark.getUrl().equals(url)).orElseThrow(InvalidUrlException::new);
+    }
 }
