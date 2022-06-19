@@ -195,4 +195,18 @@ public class BookmarkingTest {
 
         assertEquals("", bookmarking.bookmarkList.get(0).getKeyword());
     }
+
+    @Test
+    public void ensureBookmarkIsRemoved() throws InvalidUrlException {
+        Bookmark bookmark = Bookmark.builder().url("https://youtube.com").keyword("removeThis").build();
+        Bookmark bookmark2 = Bookmark.builder().url("https://orf.com").keyword("removeThis").build();
+
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(bookmark);
+        bookmarking.add(bookmark2);
+
+        bookmarking.removeBookmark(bookmark);
+
+        assertEquals(1, bookmarking.bookmarkList.size());
+    }
 }

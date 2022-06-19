@@ -71,6 +71,10 @@ public class Bookmarking {
         foundBookmark.setKeyword("");
     }
 
+    public void removeBookmark(Bookmark bookmark) {
+        this.bookmarkList.remove(bookmark);
+    }
+
     private Bookmark findBookmarkByUrl(String url) throws InvalidUrlException {
         return this.bookmarkList.stream().findFirst().filter(bookmark -> bookmark.getUrl().equals(url)).orElseThrow(InvalidUrlException::new);
     }
