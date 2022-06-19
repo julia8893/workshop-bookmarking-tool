@@ -15,6 +15,7 @@ public final class Bookmark {
     String keyword;
     String domain;
     int rating;
+    String timeStamp;
 
     public void increaseRating() {
         rating++;

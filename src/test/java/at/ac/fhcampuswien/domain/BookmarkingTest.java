@@ -209,4 +209,29 @@ public class BookmarkingTest {
 
         assertEquals(1, bookmarking.bookmarkList.size());
     }
+
+    @Test
+    public void ensureBookmarksAreSortedByHighestRating() throws InvalidUrlException {
+        Bookmark youtube = Bookmark.builder().url("https://youtube.com").keyword("youtube").build();
+        Bookmark orf = Bookmark.builder().url("https://orf.com").keyword("orf").build();
+        Bookmark facebook = Bookmark.builder().url("https://facebook.com").keyword("facebook").build();
+
+        Bookmarking bookmarking = new Bookmarking();
+        bookmarking.add(orf);
+        bookmarking.add(youtube);
+        bookmarking.add(youtube);
+        bookmarking.add(youtube);
+        bookmarking.add(youtube);
+        bookmarking.add(youtube);
+        bookmarking.add(youtube);
+        bookmarking.add(facebook);
+        bookmarking.add(facebook);
+        bookmarking.add(facebook);
+
+        List<Bookmark> result = bookmarking.sortByHighestRating();
+
+        assertEquals("youtube", result.get(0).getKeyword());
+        assertEquals("facebook", result.get(1).getKeyword());
+        assertEquals("orf", result.get(2).getKeyword());
+    }
 }

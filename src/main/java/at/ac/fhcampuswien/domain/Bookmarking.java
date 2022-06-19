@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.domain;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,5 +78,9 @@ public class Bookmarking {
 
     private Bookmark findBookmarkByUrl(String url) throws InvalidUrlException {
         return this.bookmarkList.stream().findFirst().filter(bookmark -> bookmark.getUrl().equals(url)).orElseThrow(InvalidUrlException::new);
+    }
+
+    public List<Bookmark> sortByHighestRating() {
+        return this.bookmarkList.stream().sorted(Comparator.comparing(Bookmark::getRating).reversed()).collect(Collectors.toList());
     }
 }
