@@ -8,19 +8,23 @@
     <artifactId>workshop_bookmarking_tool</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
+    <!-- PROPERTIES -->
     <properties>
-        <maven.surefire.plugin>2.22.2</maven.surefire.plugin>
-        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
-
         <java.version>1.8</java.version>
-        <project.sourceEncoding>UTF-8</project.sourceEncoding>
 
+        <project.sourceEncoding>UTF-8</project.sourceEncoding>
         <project.build.sourceEncoding>${project.sourceEncoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.sourceEncoding}</project.reporting.outputEncoding>
 
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
+        <maven.surefire.plugin>2.22.2</maven.surefire.plugin>
+
         <!-- Latest stable release does not work with Maven Surefire 2.21.0 check: https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-maven-->
         <junit.platform.version>1.7.1</junit.platform.version>
-        <junit.jupiter.api>5.7.1</junit.jupiter.api>
+        <junit.jupiter.api>5.9.0</junit.jupiter.api>
 
         <!-- Coverage configuration -->
         <jacoco.maven.version>0.8.6</jacoco.maven.version>
@@ -29,15 +33,9 @@
         <pitest.version>1.6.5</pitest.version>
         <pitest.junit5.version>0.14</pitest.junit5.version>
         <junit.platform.surefire.provider>1.3.2</junit.platform.surefire.provider>
-
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-
-        <!-- SonarCloud Configuration -->
-        <sonar.organization>julia8893</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
+    <!-- DEPENDENCIES -->
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -53,13 +51,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Javadoc plugin does not require to be explicitly stated-->
         <!-- Maven goal: mvn clean javadoc:javadoc javadoc:test-javadoc -->
         <!--
@@ -70,12 +61,28 @@
             <scope>compile</scope>
         </dependency>-->
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.9.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
+    <!-- BUILD -->
     <build>
         <plugins>
 
-            <!-- Required for compiling the project usign maven -->
+            <!-- Required for compiling the project using maven -->
             <plugin><!-- Compiler configuration-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -96,6 +103,23 @@
             </plugin>
 
             <!-- Required for running unit tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin}</version>
+                <configuration>
+                    <includes>
+                        <include>**/Test*.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**Main**</exclude>
+                    </excludes>
+
+                </configuration>
+            </plugin>
 
             <!-- Required for generating coverage report -->
             <plugin>

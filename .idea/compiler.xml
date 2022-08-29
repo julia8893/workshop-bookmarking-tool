@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="workshop-bookmarking-tool" />
+        <module name="workshop_bookmarking_tool_github" />
         <module name="workshop_bookmarking_tool" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="workshop-bookmarking-tool" options="-Xlint:all" />
       <module name="workshop_bookmarking_tool" options="-Xlint:all" />
+      <module name="workshop_bookmarking_tool_github" options="-Xlint:all" />
     </option>
   </component>
 </project>
