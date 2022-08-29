@@ -168,12 +168,12 @@
                     </inScopeClasses>-->
                     <targetClasses>
                         <!-- Example: <param>lapr.project.model.*</param> -->
-                        <param>at.ac.fhcampuswien.domain.*</param>
+                        <param>at.ac.fhcampuswien.*</param>
                     </targetClasses>
 
                     <targetTests>
                         <!-- Example: <param>lapr.project.utils.*</param> -->
-                        <param>at.ac.fhcampuswien.domain.*</param>
+                        <param>at.ac.fhcampuswien.*</param>
                     </targetTests>
 
                     <outputFormats>
